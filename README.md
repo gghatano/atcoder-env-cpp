@@ -7,16 +7,20 @@ ubuntu@docker で atcoder-toolsを使ってc++17環境を作ります。
 [環境構築]
 * Atcoder用C++環境の用意 (Docker, Docker compose)
   * [docker環境を用意](https://docs.docker.jp/docker-for-windows/install.html)して、dockerとdocker-composeを使えるようにする
-  * 下に置いてある、Dockerfile, docker-compose.ymlを同じフォルダに置く
-    * テキストをコピペするか、ページ上部の「Downlowd ZIP」から取得する
-  * Dockerfile、docker-compose.ymlを置いてあるフォルダで、powershellを開く(エクスプローラ>ファイル>powershellで開く)
-  * powershell上で、「docker compose up -d」を実行する
+  * 本レポジトリをcloneする 
+```bash
+$ git clone https://github.com/gghatano/atcoder-env-cpp.git
+```
+* 開発環境の構築
+  * powershell/terminal上で、「docker compose up -d」を実行する
 * 開発環境の用意(VS Code)
   * [VSCodeをインストールする](https://azure.microsoft.com/ja-jp/products/visual-studio-code/)
 * VSCodeからC++環境に接続する (Attach to runninc container)
   * VSCodeを開く
   * 左下端っこの緑の[><]みたいなマーク > Attach to running container 
   * atcoder用C++環境に接続できる
+
+[問題の取得・提出]
 * 問題の取得 (agen abc***)
   * 左側エクスプローラから「フォルダーを開く」 > 「atcoder-workspace」
   * VScode上部で「ターミナル」を開く
