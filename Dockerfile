@@ -22,6 +22,6 @@ RUN echo 'alias agenlogin="atcoder-tools gen --template /root/.atcodertools/temp
 RUN echo 'alias asub="atcoder-tools submit -u"' >> /root/.bashrc
 
 RUN cat /tmp/atcoder-env-cpp/template.cpp > /root/.atcodertools/template/template.cpp
-RUN cat /tmp/atcoder-env-cpp/algorighm.cpp > /root/atcoder-workspace/algorithm.cpp
+RUN cat /tmp/atcoder-env-cpp/algorithm.cpp > /root/atcoder-workspace/algorithm.cpp
 
 CMD ["/bin/bash"]
