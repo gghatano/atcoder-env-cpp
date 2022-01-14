@@ -34,6 +34,7 @@ auto make_vec(size_t a, Ts... ts){
 
 
 
+// 最大公約数・最小公倍数(非負)
 template<typename T>
 T gcd(T a, T b) {
   if(a < b) swap(a,b);
@@ -68,10 +69,10 @@ vector<ll> divisor(ll n){
   return res;
 }
 
-template<typename T>
 
 // エラトステネスの篩
 // return lp[i] := iの最小素因数(lp[i] == iならば素数)
+template<typename T>
 vector<int> SieveOfEratosthenes(int N = 10000000){
   vector<int> lp(N + 1, 0);
   vector<int> pr;
@@ -87,7 +88,7 @@ vector<int> SieveOfEratosthenes(int N = 10000000){
 }
 
 
-
+// 冪乗
 ll mypow(ll x, ll n){
   if(n == 0)
     return 1;
@@ -100,8 +101,6 @@ ll mypow(ll x, ll n){
  
 
 // 素因数分解
-long long MOD = 1000000000 + 7;
-
 template<typename T>
 map<T, ll> prime_factorize(T x){
   map<T, ll> res;
@@ -120,7 +119,6 @@ map<T, ll> prime_factorize(T x){
   if(x!=1) res[x]++;
   return res;
 }
-
 
 
 // ランレングス圧縮
@@ -145,18 +143,18 @@ vector<pair<char,int>> run_comp(string S){
 
 
 
-/* 大文字を小文字に変換 */
+// 大文字を小文字に変換
 char tolower(char c) {
   return (c + 0x20);
 }
 
-/* 小文字を大文字に変換 */
+// 小文字を大文字に変換
 char toupper(char c) {
   return (c - 0x20);
 }
 
+// ダイクストラ
 # define REP(i,n) for (int i=0;i<(n);++i)
- 
 struct edge{ll to, cost;};
 typedef pair<ll,ll> P;
 struct graph{
@@ -204,44 +202,44 @@ struct graph{
   }
 };
 
-// LCS
+// LCS:最長共通部分文字列
 string LCS(string s, string t){
- 	int n, m;
-	n = s.length();
-	m = t.length();
+  int n, m;
+  n = s.length();
+  m = t.length();
 
-	// dp[i][j] : sのi文字目、tのj文字目のLCSの長さ
+  // dp[i][j] : sのi文字目、tのj文字目のLCSの長さ
   vector<vector<int>> dp(n+1, vector<int>(m+1, 0));
  
-	for(int i = 1; i <= n; i++){
-		for(int j = 1; j <= m; j++){
-			if(s[i-1] == t[j-1]){
-				dp[i][j] = dp[i-1][j-1] + 1;
-			}else{
-				dp[i][j] = max(dp[i-1][j], dp[i][j-1]);
-			}
-		}
-	}
+  for(int i = 1; i <= n; i++){
+    for(int j = 1; j <= m; j++){
+      if(s[i-1] == t[j-1]){
+        dp[i][j] = dp[i-1][j-1] + 1;
+      }else{
+        dp[i][j] = max(dp[i-1][j], dp[i][j-1]);
+      }
+    }
+  }
  
-	// dp配列を逆からたどってLCSを作成する
-	// LCSの長さが更新されたときの文字を追加していく
+  // dp配列を逆からたどってLCSを作成する
+  // LCSの長さが更新されたときの文字を追加していく
  
-	string ans = "";
-	int x = n;
-	int y = m;
-	while(x > 0 && y > 0){
-		if(dp[x][y] == dp[x-1][y]){
-			x--;
-		}else if(dp[x][y] == dp[x][y-1]){
-			y--;
-		}else{
-			x--;
-			y--;
+  string ans = "";
+  int x = n;
+  int y = m;
+  while(x > 0 && y > 0){
+    if(dp[x][y] == dp[x-1][y]){
+      x--;
+    }else if(dp[x][y] == dp[x][y-1]){
+      y--;
+    }else{
+      x--;
+      y--;
       ans += s[x];
-		}
-	}
+    }
+  }
  
-	reverse(ans.begin(), ans.end());
+  reverse(ans.begin(), ans.end());
   return ans;
 }
 
@@ -293,6 +291,7 @@ int query(int x, int y){
   return lca;
 }
 
+// LCA-入力・回答部分
 int main(){
   int N;
   cin >> N;
@@ -363,7 +362,6 @@ int main(){
     cout << ans << endl;
 
   }
-
 }
 
 
@@ -388,7 +386,6 @@ int main() {
     cout << s[x2][y2] - s[x1][y2] - s[x2][y1] + s[x1][y1] << endl;
   }
 }  
-
 
 
 
@@ -640,7 +637,7 @@ int main() {
 }
 
 
-// segtree 
+// セグメントツリー 
 // range min query
 ll op(ll a, ll b){
   return min(a,b);

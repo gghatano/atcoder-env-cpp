@@ -6,7 +6,8 @@ RUN apt-get update \
     && apt-get install -y sudo wget curl vim
 
 RUN cd /tmp \
-    && git clone https://github.com/atcoder/ac-library.git 
+    && git clone https://github.com/atcoder/ac-library.git \
+    && git clone https://github.com/gghatano/atcoder-env-cpp
 
 RUN pip3.8 install atcoder-tools
 
@@ -20,6 +21,7 @@ RUN echo 'alias agen="atcoder-tools gen --without-login --template /root/.atcode
 RUN echo 'alias agenlogin="atcoder-tools gen --template /root/.atcodertools/template/template.cpp"' >> /root/.bashrc
 RUN echo 'alias asub="atcoder-tools submit -u"' >> /root/.bashrc
 
-RUN curl -s -S https://gist.githubusercontent.com/gghatano/1aab64239be88181d0fc91069c6fe9b4/raw/625a707e7b0c38777e5b8e9984871481243a8597/template.cpp >> /root/.atcodertools/template/template.cpp
-RUN curl -s -S https://gist.githubusercontent.com/gghatano/1aab64239be88181d0fc91069c6fe9b4/raw/625a707e7b0c38777e5b8e9984871481243a8597/zzz_algorithm.cpp >> /root/atcoder-workspace/algorighm.cpp
+RUN cat /tmp/atcoder-env-cpp/template.cpp > /root/.atcodertools/template/template.cpp
+RUN cat /tmp/atcoder-env-cpp/algorighm.cpp > /root/atcoder-workspace/algorithm.cpp
+
 CMD ["/bin/bash"]
