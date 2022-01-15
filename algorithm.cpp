@@ -365,30 +365,32 @@ int main(){
 }
 
 
+//////////////////////////////////////////
 // 2次元累積和
-int main() {
+// H x Wのグリッドに対して、[x1,x2] x [y1,y2]の領域の和を、O(1)で求める
+// 構成
+
+vector<vector<ll>> quert(vector<vector<ll>> a) {
   // 入力: H × W のグリッド
-  int H, W; cin >> H >> W;
-  vector<vector<int> > a(H, vector<int>(W));
-  for (int i = 0; i < H; ++i) for (int j = 0; j < W; ++j) cin >> a[i][j];
+  // 出力: 2次元累積和計算用の、H+1 x W+1 のグリッド
+  int H = a.size();
+  int W = a[0].size();
 
   // 二次元累積和
-  vector<vector<int> > s(H+1, vector<int>(W+1, 0));
+  vector<vector<ll>> s(H+1, vector<ll>(W+1, 0));
+
   for (int i = 0; i < H; ++i)
     for (int j = 0; j < W; ++j)
       s[i+1][j+1] = s[i][j+1] + s[i+1][j] - s[i][j] + a[i][j];
 
-  // クエリ [x1, x2) × [y1, y2) の長方形区域の和
-  int Q; cin >> Q;
-  for (int q = 0; q < Q; ++q) {
-    int x1, x2, y1, y2;
-    cin >> x1 >> x2 >> y1 >> y2;
-    cout << s[x2][y2] - s[x1][y2] - s[x2][y1] + s[x1][y1] << endl;
-  }
+  return s;
 }  
 
-
-
+// クエリ : [x1,x2] x [y1,y2] の和を計算する
+ll cumsum_query_2d(vector<vector<ll>> s, int x1, int x2, int y1, int y2){
+    return s[x2][y2] - s[x1][y2] - s[x2][y1] + s[x1][y1];
+}
+/////////////////////////////////////////
 
 // クラスカル法
 typedef pair<int,int> pii;
