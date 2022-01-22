@@ -3,6 +3,8 @@
 using namespace atcoder;
 using namespace std;
 
+# define showVector(v) REP(i,v.size()){cout << (v[i]) << " ";} cout << endl;
+
 typedef long long ll;
 typedef pair<int,int> pii;
 

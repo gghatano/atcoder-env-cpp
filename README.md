@@ -1,27 +1,30 @@
 atcoder環境
 ===
 
-ubuntu@docker で atcoder-toolsを使ってc++17環境を作ります。
-公式のatcoder-libraryも入ります
+Docker + atcoder-library + atcoder-toolsの環境を作ります。
+エディタはVScodeを想定していますが、自由に読み替えてください。
 
-[環境構築]
+[環境構築手順]
 * Atcoder用C++環境の用意 (Docker, Docker compose)
   * [docker環境を用意](https://docs.docker.jp/docker-for-windows/install.html)して、dockerとdocker-composeを使えるようにする
   * 本レポジトリをcloneする 
 ```bash
 $ git clone https://github.com/gghatano/atcoder-env-cpp.git
 ```
-* 開発環境の構築
-  * powershell/terminal上で、「docker compose up -d」を実行する
-* 開発環境の用意(VS Code)
+* 起動
+  * powershellやterminal上で、「docker compose up -d」を実行する
+* 開発環境の用意 (VSCode)
   * [VSCodeをインストールする](https://azure.microsoft.com/ja-jp/products/visual-studio-code/)
-* VSCodeからC++環境に接続する (Attach to runninc container)
+
+[VSCodeで実装する]
+* VSCodeからC++環境に接続する
   * VSCodeを開く
-  * 左下端っこの緑の[><]みたいなマーク > Attach to running container 
+  * 左下端っこの緑の[><]みたいなマーク をクリックして、「Attach to running container」を選ぶ
+  * atcoder-env-cppコンテナを選択する
   * atcoder用C++環境に接続できる
 
 [問題の取得・提出]
-* 問題の取得 (agen abc***)
+* 問題の取得 (#agen abc***)
   * 左側エクスプローラから「フォルダーを開く」 > 「atcoder-workspace」
   * VScode上部で「ターミナル」を開く
   * 例として、abc001を解いてみる。VScodeのターミナルで「agen abc001」を実行する
@@ -33,14 +36,14 @@ $ git clone https://github.com/gghatano/atcoder-env-cpp.git
 * 実装
   * 「in_1.txt」「out_1.txt」が、テストケース。inを入力したらoutが出てくるような実装をする。
   * main.cppを適切に編集する
-* テストする
+* テスト
   * ターミナルで「atest」を実行する
   * passしていたらOK
   * passしていなかったら、何かが間違っているので、直す
-* 提出する (コピペ)
+* 提出 (GUI-コピペ)
   * main.cppの内容を[Atcoderの問題ページ](https://atcoder.jp/contests/abc001/tasks/abc001_1)から提出する
     * ページ下部の「ソースコード」欄に提出する
-* 提出する (API)
+* 提出 (CLI)
   * (最初の1回だけ)ターミナルで「agenlogin abc001」を実行する
   * Atcoderのパスワード・アカウントでログインする
   * 問題フォルダ(abc001/A)に移動して、ターミナルで「asub」を実行すると、main.cppが提出できる   
