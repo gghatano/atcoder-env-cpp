@@ -103,18 +103,18 @@ ll mypow(ll x, ll n){
 // 素因数分解
 template<typename T>
 map<T, ll> prime_factorize(T x){
-  map<T, ll> res;
+    map<T, ll> res;
 
-  while(x%2==0){
-    x/=2;
-    res[2]++;
-  }
-
-  for(ll i=3;i*i<=x;i+=2){
-    while(x%i==0){
-      x/=i;
-      res[i]++;
+    while(x%2==0){
+      x/=2;
+      res[2]++;
     }
+  
+    for(ll i=3;i*i<=x;i+=2){
+      while(x%i==0){
+        x/=i;
+        res[i]++;
+      }
   }
   if(x!=1) res[x]++;
   return res;
@@ -123,19 +123,19 @@ map<T, ll> prime_factorize(T x){
 
 // ランレングス圧縮
 vector<pair<char,int>> run_comp(string S){
-  vector<pair<char,int>> v;
-  char now = S[0];
-  int num = 1;
-  char tmp = S[S.size()-1];
-  for(int i = 1; i < S.size(); i++){
-    tmp = S[i];
-    if(now == tmp){
-      num++;
-    } else { 
-      v.push_back(make_pair(now, num));
-      num = 1;
-      now = tmp;
-    }
+    vector<pair<char,int>> v;
+    char now = S[0];
+    int num = 1;
+    char tmp = S[S.size()-1];
+    for(int i = 1; i < S.size(); i++){
+      tmp = S[i];
+      if(now == tmp){
+        num++;
+      } else { 
+        v.push_back(make_pair(now, num));
+        num = 1;
+        now = tmp;
+      }
   }
   v.push_back(make_pair(tmp, num));
   return v;
@@ -145,12 +145,12 @@ vector<pair<char,int>> run_comp(string S){
 
 // 大文字を小文字に変換
 char tolower(char c) {
-  return (c + 0x20);
+    return (c + 0x20);
 }
 
 // 小文字を大文字に変換
 char toupper(char c) {
-  return (c - 0x20);
+    return (c - 0x20);
 }
 
 // ダイクストラ
@@ -206,43 +206,43 @@ struct graph{
 
 // LCS:最長共通部分文字列
 string LCS(string s, string t){
-  int n, m;
-  n = s.length();
-  m = t.length();
+    int n, m;
+        n = s.length();
+    m = t.length();
 
-  // dp[i][j] : sのi文字目、tのj文字目のLCSの長さ
-  vector<vector<int>> dp(n+1, vector<int>(m+1, 0));
+    // dp[i][j] : sのi文字目、tのj文字目のLCSの長さ
+    vector<vector<int>> dp(n+1, vector<int>(m+1, 0));
  
-  for(int i = 1; i <= n; i++){
-    for(int j = 1; j <= m; j++){
-      if(s[i-1] == t[j-1]){
-        dp[i][j] = dp[i-1][j-1] + 1;
-      }else{
-        dp[i][j] = max(dp[i-1][j], dp[i][j-1]);
-      }
+    for(int i = 1; i <= n; i++){
+        for(int j = 1; j <= m; j++){
+            if(s[i-1] == t[j-1]){
+                dp[i][j] = dp[i-1][j-1] + 1;
+            }else{
+                dp[i][j] = max(dp[i-1][j], dp[i][j-1]);
+            }
+        }
     }
-  }
  
-  // dp配列を逆からたどってLCSを作成する
-  // LCSの長さが更新されたときの文字を追加していく
+    // dp配列を逆からたどってLCSを作成する
+    // LCSの長さが更新されたときの文字を追加していく
  
-  string ans = "";
-  int x = n;
-  int y = m;
-  while(x > 0 && y > 0){
-    if(dp[x][y] == dp[x-1][y]){
-      x--;
-    }else if(dp[x][y] == dp[x][y-1]){
-      y--;
-    }else{
-      x--;
-      y--;
-      ans += s[x];
+    string ans = "";
+    int x = n;
+    int y = m;
+    while(x > 0 && y > 0){
+        if(dp[x][y] == dp[x-1][y]){
+            x--;
+        }else if(dp[x][y] == dp[x][y-1]){
+            y--;
+        }else{
+            x--;
+            y--;
+            ans += s[x];
+        }
     }
-  }
- 
-  reverse(ans.begin(), ans.end());
-  return ans;
+
+    reverse(ans.begin(), ans.end());
+    return ans;
 }
 
 
