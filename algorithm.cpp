@@ -5,6 +5,9 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+///////////////////////////
+// よく使うやつ
+///////////////////////////
 # define REP(i,n) for (int i=0;i<(n);++i)
 # define rep(i,a,b) for(int i=a;i<(b);++i)
 # define all(v) v.begin(),v.end()
@@ -15,14 +18,18 @@ template<class T> inline bool chmax(T &a, T b){ if(a < b) { a = b; return true;}
 typedef long long ll;
 
 
-// pq
+///////////////////////////
+// 優先度付きキュー(昇順、降順)
+///////////////////////////
 template<class T>
 using MaxHeap = std::priority_queue<T>;
 
 template<class T>
 using MinHeap = std::priority_queue<T, std::vector<T>, std::greater<T>>;
 
-// 多次元 vector 生成
+///////////////////////////
+// 多次元ベクトルの生成
+///////////////////////////
 template<class T>
 vector<T> make_vec(size_t a){
   return vector<T>(a);
@@ -33,8 +40,9 @@ auto make_vec(size_t a, Ts... ts){
 }
 
 
-
-// 最大公約数・最小公倍数(非負)
+///////////////////////////
+// 最小公倍数、最大公約数
+///////////////////////////
 template<typename T>
 T gcd(T a, T b) {
   if(a < b) swap(a,b);
@@ -48,7 +56,9 @@ ll lcm(ll a, ll b){
   return (a/g)*b;
 }
 
-// 素数判定 O(√n)
+///////////////////////////
+// 素数判定
+///////////////////////////
 bool is_prime(ll n){
   if(n == 1) return false;
   for(ll i = 2; i * i <= n; i++){
@@ -57,7 +67,9 @@ bool is_prime(ll n){
   return true;
 }
 
-// 約数列挙 O(√n)
+///////////////////////////
+// 約数列挙
+///////////////////////////
 vector<ll> divisor(ll n){
   vector<ll> res;
   for(ll i = 1; i * i <= n; i++){
@@ -161,9 +173,8 @@ char toupper(char c) {
 }
 
 ///////////////////////////
-// ダイクスストラ法
+// ダイクストラ法
 ///////////////////////////
-# define REP(i,n) for (int i=0;i<(n);++i)
 struct edge{ll to, cost;};
 typedef pair<ll,ll> P;
 
@@ -541,40 +552,6 @@ struct FormalPowerSeries : vector<T> {
     return {res.begin(), res.begin() + d};
   }
 
-  // // fast: FMT-friendly modulus only
-  // F &operator*=(const F &g) {
-  //   int n = (*this).size();
-  //   *this = convolution(*this, g);
-  //   (*this).resize(n);
-  //   return *this;
-  // }
-  // F &operator/=(const F &g) {
-  //   int n = (*this).size();
-  //   *this = convolution(*this, g.inv(n));
-  //   (*this).resize(n);
-  //   return *this;
-  // }
-
-  // // naive
-  // F &operator*=(const F &g) {
-  //   int n = (*this).size(), m = g.size();
-  //   drep(i, n) {
-  //     (*this)[i] *= g[0];
-  //     rep2(j, 1, min(i+1, m)) (*this)[i] += (*this)[i-j] * g[j];
-  //   }
-  //   return *this;
-  // }
-  // F &operator/=(const F &g) {
-  //   assert(g[0] != T(0));
-  //   T ig0 = g[0].inv();
-  //   int n = (*this).size(), m = g.size();
-  //   rep(i, n) {
-  //     rep2(j, 1, min(i+1, m)) (*this)[i] -= (*this)[i-j] * g[j];
-  //     (*this)[i] *= ig0;
-  //   }
-  //   return *this;
-  // }
-
   // sparse
   F &operator*=(vector<pair<int, T>> g) {
     int n = (*this).size();
@@ -685,7 +662,7 @@ int main(){
 
     auto comb = [&fact](int a, int b){
         mint ret = 0;
-        if(a <= 0 || b <= 0) return ret;
+        if(a < 0 || b < 0) return ret;
         if(a < b) return ret;
 
         ret = fact[a];
