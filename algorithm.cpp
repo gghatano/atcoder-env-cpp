@@ -70,8 +70,9 @@ vector<ll> divisor(ll n){
 }
 
 
-// エラトステネスの篩
-// return lp[i] := iの最小素因数(lp[i] == iならば素数)
+///////////////////////////
+// エラトステネスのふるい
+///////////////////////////
 template<typename T>
 vector<int> SieveOfEratosthenes(int N = 10000000){
   vector<int> lp(N + 1, 0);
@@ -88,7 +89,9 @@ vector<int> SieveOfEratosthenes(int N = 10000000){
 }
 
 
+///////////////////////////
 // 冪乗
+///////////////////////////
 ll mypow(ll x, ll n){
   if(n == 0)
     return 1;
@@ -100,7 +103,9 @@ ll mypow(ll x, ll n){
 }
  
 
+///////////////////////////
 // 素因数分解
+///////////////////////////
 template<typename T>
 map<T, ll> prime_factorize(T x){
     map<T, ll> res;
@@ -121,7 +126,9 @@ map<T, ll> prime_factorize(T x){
 }
 
 
+///////////////////////////
 // ランレングス圧縮
+///////////////////////////
 vector<pair<char,int>> run_comp(string S){
     vector<pair<char,int>> v;
     char now = S[0];
@@ -153,8 +160,9 @@ char toupper(char c) {
     return (c - 0x20);
 }
 
-// ダイクストラ
-// ダイクストラ
+///////////////////////////
+// ダイクスストラ法
+///////////////////////////
 # define REP(i,n) for (int i=0;i<(n);++i)
 struct edge{ll to, cost;};
 typedef pair<ll,ll> P;
@@ -204,7 +212,9 @@ struct graph{
 };
 
 
-// LCS:最長共通部分文字列
+///////////////////////////
+// LCS
+///////////////////////////
 string LCS(string s, string t){
     int n, m;
         n = s.length();
@@ -246,8 +256,9 @@ string LCS(string s, string t){
 }
 
 
+///////////////////////////
 // LCA
-// ダブリングと根からの距離で頑張る
+///////////////////////////
 
 vector<vector<int>> parent;
 map<int,int> dist;
@@ -394,7 +405,9 @@ ll cumsum_query_2d(vector<vector<ll>> s, int x1, int x2, int y1, int y2){
 }
 /////////////////////////////////////////
 
+///////////////////////////
 // クラスカル法
+///////////////////////////
 typedef pair<int,int> pii;
 
 long long MOD = 1000000000 + 7;
@@ -453,8 +466,9 @@ int main(){
 }
 
 
-//形式的冪級数
-
+///////////////////////////
+// 形式的冪級数
+///////////////////////////
 #define rep2(i, m, n) for (int i = (m); i < (n); ++i)
 #define rep(i, n) rep2(i, 0, n)
 #define drep2(i, m, n) for (int i = (m)-1; i >= (n); --i)
@@ -640,8 +654,9 @@ int main() {
   cout << f[n].val() << '\n';
 }
 
-
+///////////////////////////
 // セグメントツリー 
+///////////////////////////
 // range min query
 ll op(ll a, ll b){
   return min(a,b);
@@ -653,4 +668,33 @@ ll e(){
 int main(){
   int N = 10;
   segtree<ll,op,e> tree(N);
+}
+
+///////////////////////////
+// mint での組み合わせ
+///////////////////////////
+
+int main(){
+    // set precision (10 digit)
+
+    int N; cin >> N;
+    vector<mint> fact(N+1,1);
+    for(int i = 2; i <= N; i++){
+        fact[i] = fact[i-1] * i; 
+    }
+
+    auto comb = [&fact](int a, int b){
+        mint ret = 0;
+        if(a <= 0 || b <= 0) return ret;
+        if(a < b) return ret;
+
+        ret = fact[a];
+        ret *= fact[b].inv();
+        ret *= fact[a-b].inv();
+        return ret;
+    };
+
+    cerr << comb(4,2).val() << endl;
+    cout << setprecision(10);
+
 }
